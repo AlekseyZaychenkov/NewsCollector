@@ -7,3 +7,7 @@ pytest==7.1.1
 pytz
 asgiref==3.5.0
 django-object-actions==4.0.0
+django-money
+beautifulsoup4==4.8.1
+requests
+lxml

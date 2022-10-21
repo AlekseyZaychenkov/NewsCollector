@@ -1,23 +1,67 @@
 {% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
 
 <div class="row">
-    {% for image in images %}
-        {% block post_info %}
-        {% include 'image_block.html' %}
-        {% endblock %}
-    {% endfor %}
 
-    <div class="col-md-3 card">
-<!--        <div class="row top-image-row position-relative">-->
-            <div class="col text-center">
-                <a type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#image_create_modal"> + Add new image + </a>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col">
+                <container class="border post_counter border-dark">
+                    {{ products|length }}
+                </container>
+                <container class="border post_counter_text border-dark">
+                    products(-s) in data base
+                </container>
             </div>
-<!--        </div>-->
+            <div class="col">
+                <form enctype="multipart/form-data" method="post"> {% csrf_token %}
+                    <div class="form-group form-check">
+                        {{ download_posts_form }}
+                        <button class="btn btn-primary btn-sm" type="submit" name="action" value="download_posts">Download products</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
 
-    {% block image_block_modals %}
-    {% include 'image_block_modals.html' %}
-    {% endblock %}
+
+
+
+    <div class="col-md-3">
+
+    <table class="table table-bordered">
+        <tr>
+            <th>id_from_source</th>
+            <th>name</th>
+            <th>vendor_code</th>
+            <th>price</th>
+            <th>price_with_discount</th>
+            <th>availability</th>
+        </tr>
+
+
+    {% for product in products %}
+        <tr>
+            <td>{{product.id_from_source}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.vendor_code}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.price_with_discount}}</td>
+            <td>{{product.availability}}</td>
+        </tr>
+    {% endfor %}
+            </table>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-3">
+
+    </div>
 </div>
 
 {% endblock content %}
