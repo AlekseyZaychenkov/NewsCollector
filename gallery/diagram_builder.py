@@ -12,20 +12,10 @@ log = logging.getLogger(__name__)
 class DiagramBuilder:
 
     def draw(self):
-
         self.draw_price_distribution_for_available_and_on_order('Распределение по цене (доступно в магазинах)',
                                                               'Распределение по цене (под заказ)' )
-
         self.draw_top_10_vendor_code_by_price('Топ 10 самых дорогих диванов')
-
         self.draw_number_of_unique_ids_for_available_and_on_order('Диаграмма уникальных id')
-
-
-
-
-
-
-
 
     def draw_price_distribution_for_available_and_on_order(self, available_diagram_name, on_order_diagram_name):
         products_count = Product.objects.count()
@@ -82,7 +72,6 @@ class DiagramBuilder:
 
         plt.savefig(f'{on_order_diagram_name}.png')
 
-
     def draw_top_10_vendor_code_by_price(self, diagram_name):
         products_top_10 = Product.objects.order_by('-price')[:10]
         products_top_10 = sorted(products_top_10, key=operator.attrgetter('price'))
@@ -103,7 +92,6 @@ class DiagramBuilder:
         plt.title(diagram_name)
 
         plt.savefig(f'{diagram_name}png')
-
 
     def draw_number_of_unique_ids_for_available_and_on_order(self, diagram_name):
         products_available_num = Product.objects.filter(availability='доступно').count()
