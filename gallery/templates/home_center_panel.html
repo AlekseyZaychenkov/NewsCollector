@@ -41,17 +41,17 @@
         </tr>
 
 
-    {% for product in products %}
-        <tr>
-            <td>{{product.id_from_source}}</td>
-            <td>{{product.name}}</td>
-            <td>{{product.vendor_code}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.price_with_discount}}</td>
-            <td>{{product.availability}}</td>
-        </tr>
-    {% endfor %}
-            </table>
+        {% for product in products %}
+            <tr>
+                <td>{{product.id_from_source}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.vendor_code}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.price_with_discount}}</td>
+                <td>{{product.availability}}</td>
+            </tr>
+        {% endfor %}
+    </table>
     </div>
     <div class="col-md-3">
 

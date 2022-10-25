@@ -11,3 +11,7 @@ django-money
 beautifulsoup4==4.8.1
 requests
 lxml
+dash
+pandas
+plotly
+matplotlib

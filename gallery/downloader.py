@@ -51,14 +51,18 @@ class Downloader:
                     availability = availability.text
 
                 prices = product.find('div', {'class': 'item__footer mt-auto'}).find('div', {'class': 'price'})
-                regex = re.compile('store-price.*')
-                store_price = prices.find('a', {'class': regex})
-                if store_price:
-                    store_price = store_price.text[:-2].replace(' ', '')
                 regex = re.compile('online-price.*')
                 online_price = prices.find('div', {'class': regex})
                 if online_price:
                     online_price = online_price.text[:-2].replace(' ', '')
+                regex = re.compile('store-price.*')
+                store_price = prices.find('a', {'class': regex})
+                if store_price:
+                    store_price = store_price.text[:-2].replace(' ', '')
+                else:
+                    store_price = online_price
+
+
                 if not (store_price or online_price):
                     log.error("Prices was not parsed. Check website html structure!")
 
