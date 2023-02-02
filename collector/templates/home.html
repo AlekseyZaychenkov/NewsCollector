@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+{% load static %}
+
+
+<style>
+  .post_counter {
+    width: 50px;
+    margin: auto;
+    margin-left: 25px;
+    margin-right: 5px;
+    border: 3px solid #73AD21;
+  }
+
+  .post_counter_text {
+    width: 100px;
+    margin: auto;
+    margin-left: 5px;
+    border: 3px solid #73AD21;
+  }
+</style>
+
+
+<div class="container-fluid">
+    <h3>News downloader</h3>
+    <hr>
+
+    <div class="row">
+
+        <div class="container-fluid">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#download_museums_modal">
+                Download list of museums from .csv file
+            </button>
+
+            <div class="row">
+                <div class="col">
+                    <container class="border post_counter border-dark">
+                        {{ museums|length }}
+                    </container>
+                    <container class="border post_counter_text border-dark">
+                        museum(-s) in data base
+                    </container>
+                </div>
+            </div>
+        </div>
+
+        {% block modals %}
+        {% include 'modals.html' %}
+        {% endblock %}
+
+
+        <h4>News list</h4>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Название новости</th>
+                <th>Текст новости</th>
+                <th>Ссылка на новость</th>
+            </tr>
+
+            {% for news in news_list %}
+                <tr>
+                    <td>{{news.header}}</td>
+                    <td>{{news.text}}</td>
+                    <td>{{news.link}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+
+
+{% endblock content %}
