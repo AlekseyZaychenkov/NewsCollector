@@ -23,50 +23,83 @@
 <div class="container-fluid">
     <h3>News downloader</h3>
     <hr>
-
     <div class="row">
-
         <div class="container-fluid">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#download_museums_modal">
                 Download list of museums from .csv file
             </button>
-
             <div class="row">
                 <div class="col">
                     <container class="border post_counter border-dark">
-                        {{ museums|length }}
+                        {{ museums_counter }}
                     </container>
                     <container class="border post_counter_text border-dark">
-                        museum(-s) in data base
+                        total museum(-s) in database
+                    </container>
+                </div>
+                <div class="col">
+                    <container class="border post_counter border-dark">
+                        {{ museums_wordpress_counter }}
+                    </container>
+                    <container class="border post_counter_text border-dark">
+                        museum(-s) in database supports WordPress API
+                    </container>
+                </div>
+                <div class="col">
+                    <container class="border post_counter border-dark">
+                        {{ museums_not_wordpress_counter }}
+                    </container>
+                    <container class="border post_counter_text border-dark">
+                        museum(-s) in database don't support WordPress API
+                    </container>
+                </div>
+                <div class="col">
+                    <container class="border post_counter border-dark">
+                        {{ museums_not_wordpress_defined_counter }}
+                    </container>
+                    <container class="border post_counter_text border-dark">
+                        museum(-s) in database have not defined supporting WordPress API
                     </container>
                 </div>
             </div>
         </div>
-
         {% block modals %}
         {% include 'modals.html' %}
         {% endblock %}
-
-
-        <h4>News list</h4>
-
-        <table class="table table-bordered">
-            <tr>
-                <th>Название новости</th>
-                <th>Текст новости</th>
-                <th>Ссылка на новость</th>
-            </tr>
-
-            {% for news in news_list %}
-                <tr>
-                    <td>{{news.header}}</td>
-                    <td>{{news.text}}</td>
-                    <td>{{news.link}}</td>
-                </tr>
-            {% endfor %}
-        </table>
-
     </div>
+
+    <button type="button" class="btn btn-outline-dark">
+        <a href="download_news">Download News</a>
+    </button>
+
+    <form enctype="multipart/form-data" method="post" class="mt-3"> {% csrf_token %}
+        <div class="form-row">
+            <label>Find in news:</label>
+            {% render_field find_news_by_query_form.query class="form-control" %}
+            {{ download_museums_form.text.errors }}
+        </div>
+        <button class="btn btn-primary" type="submit" name="action" value="find_news_by_query">Find</button>
+    </form>
+
+    <h4>News list</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>Название новости</th>
+            <th>Текст новости</th>
+            <th>Ссылка на новость</th>
+        </tr>
+        {% for news in news_list %}
+            <tr>
+                <td>{{news.title}}</td>
+                <td>
+                    {% autoescape off %}
+                        {{news.text}}
+                    {% endautoescape %}
+                </td>
+                <td>{{news.link}}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 
 

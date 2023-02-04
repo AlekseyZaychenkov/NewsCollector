@@ -4,9 +4,9 @@ from collector.models import *
 
 @admin.register(Museum)
 class MuseumAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_with_wordpress', 'link')
+    list_display = ('name', 'supports_wordpress_api', 'url')
 
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'museum', 'title', 'text', 'datetime', 'link')
