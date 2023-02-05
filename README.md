@@ -8,6 +8,8 @@
     • source venv/bin/activate
     • python3.10 -m pip install --upgrade pip
     • pip3 install -r requirements.txt
+    • python3.10 manage.py makemigrations
+    • python manage.py migrate --run-syncdb
     • python manage.py runserver
 ИЛИ скрипт (необходим установленый docker)
 ./docker_run.sh
