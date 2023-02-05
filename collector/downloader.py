@@ -139,7 +139,7 @@ def download_news(museums_list):
     ioloop = asyncio.new_event_loop()
     asyncio.set_event_loop(ioloop)
 
-    for museum in museums_list[280:]:
+    for museum in museums_list:
         if counter % 10 == 0 and len(tasks) > 0:
             wait_tasks = asyncio.wait(tasks)
             ioloop.run_until_complete(wait_tasks)

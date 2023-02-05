@@ -15,6 +15,3 @@ class News(models.Model):
     text = models.TextField(blank=True)
     datetime = models.DateTimeField(null=True)
     link = models.CharField(max_length=2047, null=True)
-
-    def __str__(self):
-        return f"{self.museum} {self.title}"
